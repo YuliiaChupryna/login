@@ -129,7 +129,7 @@ const LoginForm = ({
                 type="submit"
             >
                 Log in
-                <div className="arrow">🡢</div>
+                <span className="arrow">🡢</span>
             </button>
 
             <p className="sign-in__forgotten-text">Forgot your password</p>

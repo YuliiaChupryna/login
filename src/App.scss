@@ -79,7 +79,9 @@ a {
 
   &__submit-btn {
     width: 100%;
-    background: linear-gradient(90deg, #126bd5 0%, #48a4d9 100%);
+    position: relative;
+    z-index: 1;
+    background-image: linear-gradient(90deg, #126bd5 0%, #48a4d9 100%);
     border: none;
     border-radius: 5px;
     font-weight: bold;
@@ -87,20 +89,40 @@ a {
     height: 40px;
     margin-top: 20px;
     margin-bottom: 20px;
-    transition: background 3s;
+    transition: background-image 1s;
+
+    &::before {
+      position: absolute;
+      border-radius: 5px;
+      content: "";
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-image: linear-gradient(90deg, #48a4d9 0%, #126bd5 100%);
+      z-index: -1;
+      transition: opacity 2s linear;
+      opacity: 0;
+    }
 
     &:hover {
       cursor: pointer;
-      background: linear-gradient(90deg, #48a4d9 0%, #126bd5 100%);
+
+      &::before {
+        opacity: 1;
+      }
+
+      & .arrow {
+        animation: moveright 1s infinite;
+      }
 
 
     }
 
     & .arrow {
-      &:hover {
-        animation: moveright 1s;
+        position: relative;
+        margin-left: 10px;
       }
-    }
   }
 
   &__forgotten-text {
@@ -200,4 +222,9 @@ a {
       border-bottom: 8px solid transparent;
     }
   }
+}
+
+@keyframes moveright {
+  from {left: 0px}
+  to {left: 10px}
 }

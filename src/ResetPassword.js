@@ -62,7 +62,7 @@ const ResetPassword = ({
                     className={cn(
                         'sign-in__hr',
                         { 'sign-in__hr--valid': isInputingEmailValid },
-                        { 'login__hr--error': isInputingEmailValid === false}
+                        { 'sign-in__hr--error': isInputingEmailValid === false}
                     )}
                 />
 
@@ -73,7 +73,6 @@ const ResetPassword = ({
                     type="submit"
                 >
                     Send me instructions
-                    <div className="arrow">🡢</div>
                 </button>
             </form>
         </div>
