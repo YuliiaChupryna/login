@@ -8,23 +8,28 @@ import ResetPassword from "./ResetPassword";
 
 const App = ({ password, email, isResetClicked }) =>  (
     <section className="sign-in">
-        <div className="sign-in__wrapper">
+        <div className="sign-in__left-content">
             <article className="sign-in__support">
-                <img src="./images/logo.png" alt="IO" className="sign-in__logo"/>
-                <p>Technologies</p>
-                <p>Get how-to help and instructions or specific features in</p>
-                <button
-                    className="sign-in__support-btn"
-                    type="button">
-                    Help center
-                </button>
-                <span>or</span>
-                <button
-                    className="sign-in__support-btn"
-                    type="button">
-                    Support
-                </button>
+                <div className="sign-in__name">
+                     <h2 className="sign-in__logo">Technologies</h2>
+                </div>
+                    <p className="sign-in__instruction-text">Get how-to help and instructions or specific features in</p>
+                <div className="sign-in__support-buttons">
+                    <button
+                        className="sign-in__support-btn"
+                        type="button">
+                        Help center
+                    </button>
+                    <span>or</span>
+                    <button
+                        className="sign-in__support-btn"
+                        type="button">
+                        Support
+                    </button>
+                </div>
             </article>
+        </div>
+        <div className="sign-in__right-content">
             {!email && !password && !isResetClicked && <LoginForm />}
             {email && password && <ProjectsList />}
             {isResetClicked && <ResetPassword />}

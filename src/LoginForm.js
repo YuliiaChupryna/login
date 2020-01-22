@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import cn from 'classnames';
+import { debounce } from 'debounce';
 import {
     getEmail,
     getPassword,
@@ -90,39 +91,39 @@ const LoginForm = ({
                 Sign in to continue to IO technologies
             </p>
         <form onSubmit={handleSubmit}>
-            <input
-                value={inputingEmail}
-                className="sign-in__input"
-                type="email"
-                placeholder="Your email"
-                onChange={event => handleChangeInput(event, 'email', /[^@]+@[^\.]+\.+[a-zA-Z]+[a-zA-Z]+/g)}
-             />
-            <hr
-                className={cn(
-                    'sign-in__hr',
-                    { 'sign-in__hr--valid': isInputingEmailValid },
-                    { 'sign-in__hr--error': isInputingEmailValid === false}
-                )}
-            />
+            <div className="sign-in__input-wrapper">
+                <input
+                    value={inputingEmail}
+                    className={cn(
+                        'sign-in__input',
+                        { 'sign-in__input--valid': isInputingEmailValid },
+                        { 'sign-in__input--error': isInputingEmailValid === false},
+                        { 'sign-in__input--submit-err': isEmailError }
+                    )}
+                    type="email"
+                    placeholder="Your email"
+                    onChange={event => handleChangeInput(event, 'email', /^[a-zA-Z]+[a-zA-Z0-9\.\_\-]*@[^\.]+\.+[a-zA-Z]+[a-zA-Z]+/g)}
+                 />
 
-            {isEmailError && (<p className="sign-in__error-message">Oops! Your email is not valid</p>)}
+                {isEmailError && (<p className="sign-in__error-message">Oops! Your email is not valid</p>)}
+            </div>
 
-            <input
-                className="sign-in__input"
-                value={inputingPassword}
-                type="password"
-                placeholder="Password"
-                onChange={event => handleChangeInput(event, 'password', /.{8,}/g)}
-            />
-            <hr
-                className={cn(
-                    'sign-in__hr',
-                    { 'sign-in__hr--valid': isInputingPasswordValid },
-                    { 'sign-in__hr--error': isInputingPasswordValid === false}
-                )}
-            />
+            <div className="sign-in__input-wrapper">
+                <input
+                    className={cn(
+                        'sign-in__input',
+                        { 'sign-in__input--valid': isInputingPasswordValid },
+                        { 'sign-in__input--error': isInputingPasswordValid === false },
+                        { 'sign-in__input--submit-err': isPasswordError }
+                    )}
+                    value={inputingPassword}
+                    type="password"
+                    placeholder="Password"
+                    onChange={event => handleChangeInput(event, 'password', /.{8,}/g)}
+                />
 
-            {isPasswordError && <p className="sign-in__error-message">Oops! Your password is not valid</p>}
+                {isPasswordError && <p className="sign-in__error-message">Oops! Your password is not valid</p>}
+            </div>
 
             <button
                 className="sign-in__submit-btn"

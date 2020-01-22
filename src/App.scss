@@ -1,3 +1,6 @@
+@import "fonts";
+@import "vars";
+
 body,
 h1,
 h2,
@@ -9,7 +12,6 @@ hr,
 div {
   margin: 0;
   padding: 0;
-  font-family: Helvetica, sans-serif;
 }
 
 body * {
@@ -26,69 +28,246 @@ a {
 }
 
 .sign-in {
-  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background-image: url("./images/leftbgwide.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
   height: 100vh;
-  background: radial-gradient(circle at 0%, transparent 52%, #10172f 52%),
-  linear-gradient( 34deg, #727ace 0%, #717bce 10%, transparent 10%, transparent 100%),
-  linear-gradient( 27deg, #6c74cc 10%, #6c73cc 20%, transparent 20%, transparent 100%),
-  linear-gradient( 27deg, #6871cb 20%, #6775cc 35%, transparent 35%, transparent 100%),
-  linear-gradient( 22deg, #606ac3 35%, #6375c7 45%, transparent 45%, transparent 100%),
-  linear-gradient( 22deg, #5f7bca 45%, #648fd2 100%);
 
-  &__wrapper {
-    display: flex;
+  @media (max-width: $breakpoint-tablet-lg) {
+    background: transparent;
+    display: block;
+  }
+
+  &__left-content {
     height: 100%;
-    justify-content: space-between;
+    width: 50%;
+
+    @media (max-width: $breakpoint-tablet-lg) {
+      height: 100vh;
+      width: 100%;
+      /*background: linear-gradient(34deg, #727ace 0%, #6598d6 5%, transparent 5%, transparent 100%),
+    linear-gradient(27deg, #727ace 5%, #717bce 10%, transparent 10%, transparent 100%),
+    linear-gradient(27deg, #6c74cc 10%, #6773cb 20%, transparent 20%, transparent 100%)
+    ;*/
+      background: linear-gradient(34deg, #727ace 0%, #6598d6 100%);
+    }
+
+  }
+
+  &__support {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding-left: 8%;
-    padding-right: 15%;
+    height: 100%;
+  }
+
+  &__name {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+
+    @media screen and (max-width: $breakpoint1600) {
+      margin-bottom: 20px;
+    }
   }
 
   &__logo {
-    height: 61px;
-    object-fit: contain;
+    font-family: $museo;
+    letter-spacing: -2px;
+    position: relative;
+    font-size: 42px;
+    color: #a5bbe4;
+    font-weight: 300;
+    left: 38px;
+    margin-bottom: 2vh;
+
+    @media screen and (max-width: $breakpoint1600) {
+      font-size: 30px;
+    }
+
+    &::before {
+      position: absolute;
+      content: "";
+      width: 58px;
+      height: 42px;
+      left: -68px;
+      top: 0;
+      background-image: url('./images/logo.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      @media screen and (max-width: $breakpoint1600) {
+        width: 44px;
+        height: 32px;
+        left: -50px;
+      }
+    }
+  }
+
+  &__instruction-text {
+    font-family: $helvetica-light;
+    color: #ebf0f9;
+    font-size: 27px;
+    margin-bottom: 2vh;
+
+    @media screen and (max-width: $breakpoint1600) {
+      font-size: 18px;
+    }
+
   }
 
   &__support-btn {
     background-color: rgba(255, 255, 255, 0.2);
+    padding: 15px 30px;
+    text-transform: uppercase;
+    font-size: 20px;
     border: none;
     border-radius: 5px;
     color: white;
+    transition: background-color 1s;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: $breakpoint1600) {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+
+    &:first-of-type {
+      margin-right: 10px;
+    }
+
+    &:last-of-type {
+      margin-left: 10px;
+    }
+  }
+
+  &__right-content {
+    height: 100%;
+    width: 50%;
+    background-image: url('./images/rightbgwidde.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: $breakpoint-tablet-lg) {
+      background: #10172f;
+      width: 100%;
+    }
+  }
+
+  &__login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 50%;
+
+    @media (max-width: $breakpoint1600) {
+      width: 70%;
+    }
+  }
+
+  &__input-wrapper {
+    position: relative;
+    display: flex;
   }
 
   &__input {
+    font-family: $helvetica-medium;
+    position: relative;
     background-color: transparent;
+    font-size: 27px;
     border: none;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
+    width: 100%;
+    padding: 25px 0;
+    border-bottom: 2px solid #616983;
 
     &::placeholder {
       color: #616983;
       opacity: 1;
     }
+
+    &--valid {
+      border-bottom: 2px solid green;
+    }
+
+    &--error {
+      border-bottom: 2px solid red;
+    }
+
+    &--submit-err {
+      animation: submit-err 1s;
+    }
+  }
+
+  &__error-message {
+    position: relative;
+    right: -40px;
+    top: 30px;
+    display: flex;
+    width: 20%;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: white;
+    color: black;
+    font-size: 12px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+
+    @media (max-width: $breakpoint1600) {
+      width: 100px;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      right: 100%;
+      top: 8px;
+      width: 0;
+      height: 0;
+      border-top: 8px solid transparent;
+      border-right: 10px solid white;
+      border-bottom: 8px solid transparent;
+    }
   }
 
   &__heading {
-    font-size: 32px;
+    font-family: $helvetica-medium;
+    font-size: 50px;
   }
 
   &__text {
+    font-family: $helvetica-neue;
     color: #616983;
-    margin-bottom: 20px;
+    margin-bottom: 26px;
   }
 
   &__submit-btn {
-    width: 100%;
+    width: 80%;
     position: relative;
     z-index: 1;
-    background-image: linear-gradient(90deg, #126bd5 0%, #48a4d9 100%);
+    background-image: linear-gradient(90deg, #126bd5 0%, #2f8ad7 50%, #48a4d9 100%);
     border: none;
     border-radius: 5px;
     font-weight: bold;
     text-transform: uppercase;
-    height: 40px;
+    height: 50px;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 5vh;
     transition: background-image 1s;
 
     &::before {
@@ -99,7 +278,7 @@ a {
       right: 0;
       bottom: 0;
       left: 0;
-      background-image: linear-gradient(90deg, #48a4d9 0%, #126bd5 100%);
+      background-image: linear-gradient(90deg, #48a4d9 0%, #2f8ad7 50%, #126bd5 100%);
       z-index: -1;
       transition: opacity 2s linear;
       opacity: 0;
@@ -121,12 +300,17 @@ a {
 
     & .arrow {
         position: relative;
-        margin-left: 10px;
       }
   }
 
+  &__reset {
+    width: 60%;
+  }
+
   &__forgotten-text {
+    font-family: $helvetica-neue;
     display: inline-block;
+    color: #616983;
   }
 
   &__reset-btn {
@@ -134,6 +318,12 @@ a {
     background: none;
     color: #3a91e2;
     border: none;
+    transition: color 1s;
+
+    &:hover {
+      cursor: pointer;
+      color: white;
+    }
   }
 
   &__hr {
@@ -143,16 +333,6 @@ a {
     border: none;
     height: 2px;
     width: 100%;
-
-    &--valid {
-      background-color: green;
-      color: green;
-    }
-
-    &--error {
-      background-color: red;
-      color: red;
-    }
   }
 
   &__projects-list {
@@ -185,7 +365,7 @@ a {
 
   &__projects {
     text-align: center;
-    width: 25%;
+    width: 60%;
   }
 
   &__link {
@@ -194,37 +374,17 @@ a {
     height: 100%;
     align-items: center;
   }
-
-  &__error-message {
-    width: 120px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: white;
-    color: black;
-    font-size: 12px;
-    position: relative;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-
-    &:before {
-      content: "";
-      position: absolute;
-      right: 100%;
-      top: 8px;
-      width: 0;
-      height: 0;
-      border-top: 8px solid transparent;
-      border-right: 10px solid white;
-      border-bottom: 8px solid transparent;
-    }
-  }
 }
 
 @keyframes moveright {
-  from {left: 0px}
+  from {left: 0}
   to {left: 10px}
+}
+
+@keyframes submit-err {
+  0% {left: 0}
+  25% {left: 10px}
+  50% {left: -10px}
+  75% {left: 5px}
+  100% {left: 0}
 }
