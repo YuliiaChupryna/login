@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { getIsResettingEmailError } from "../redux/store";
+
 import {
     setResettingEmail,
     setIsResettingEmailError,
-    getIsResettingEmailError,
     setIsResetClicked
-} from "./redux/store";
+} from '../redux/resetReducer';
+
 import cn from "classnames";
 
 const ResetPassword = ({
@@ -32,6 +35,13 @@ const ResetPassword = ({
         }
     };
 
+    const goBack = () => {
+        setIsResetClicked(false);
+        setInputingEmail('');
+        setIsInputingEmailValid(null);
+        setIsResettingEmailError(false);
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -50,6 +60,13 @@ const ResetPassword = ({
 
     return (
         <div className="sign-in__reset">
+            <button
+                type="button"
+                className="sign-in__button-back"
+                onClick={goBack}
+            >
+                <img src="../images/arrow-back.png" alt="Back" />
+            </button>
             <h2 className="sign-in__heading">Forgot password?</h2>
             <form onSubmit={handleSubmit}>
                 <div className="sign-in__input-wrapper">
@@ -61,9 +78,13 @@ const ResetPassword = ({
                             { 'sign-in__input--error': isInputingEmailValid === false},
                             { 'sign-in__input--submit-err': isResettingEmailError }
                         )}
-                        type="email"
+                        type="text"
                         placeholder="Your email"
-                        onChange={event => handleChangeInput(event, 'email', /[^@]+@[^\.]+\.+[a-zA-Z]+[a-zA-Z]+/g)}
+                        onChange={event => handleChangeInput(
+                            event,
+                            'email',
+                            /^[a-zA-Z]+[a-zA-Z0-9\.\_\-]*@[^\.]+\.+[a-zA-Z]+[a-zA-Z]+/g
+                        )}
                     />
 
                     {isResettingEmailError && (<p className="sign-in__error-message">Oops! Your email is not valid</p>)}
@@ -72,6 +93,7 @@ const ResetPassword = ({
                 <button
                     className="sign-in__submit-btn"
                     type="submit"
+                    disabled={isResettingEmailError}
                 >
                     Send me instructions
                 </button>
@@ -91,3 +113,10 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ResetPassword);
+
+ResetPassword.propTypes = {
+    setIsResetClicked: PropTypes.func.isRequired,
+    setResettingEmail: PropTypes.func.isRequired,
+    setIsResettingEmailError: PropTypes.func.isRequired,
+    isResettingEmailError: (PropTypes.bool || null).isRequired,
+};

@@ -1,5 +1,5 @@
 import React from 'react';
-import { projects } from "./redux/constants";
+import { projects } from "../redux/constants";
 
 const ProjectsList = () => {
     return (
@@ -7,7 +7,7 @@ const ProjectsList = () => {
             <h2
                 className="sign-in__heading"
             >
-                Hi, Nikita!
+                Hi, <span className="sign-in__person-name">Nikita!</span>
             </h2>
             <p
                 className="sign-in__text"

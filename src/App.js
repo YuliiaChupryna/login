@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.scss';
-import LoginForm from "./LoginForm";
+import './styles/App.scss';
+import LoginForm from "./components/LoginForm";
 import { getEmail, getPassword, getIsResetClicked } from "./redux/store";
 import { connect } from 'react-redux';
-import ProjectsList from "./ProjectsList";
-import ResetPassword from "./ResetPassword";
+import ProjectsList from "./components/ProjectsList";
+import ResetPassword from "./components/ResetPassword";
 
 const App = ({ password, email, isResetClicked }) =>  (
     <section className="sign-in">
