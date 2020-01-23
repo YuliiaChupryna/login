@@ -147,7 +147,7 @@ const LoginForm = ({
                     disabled={isEmailError || isPasswordError}
                 >
                     Log in
-                    <span className="arrow">🡢</span>
+                    <img src='./images/arrow-submit.png' alt="arrow" className="arrow" />
                 </button>
 
                 <p className="sign-in__forgotten-text">Forgot your password</p>

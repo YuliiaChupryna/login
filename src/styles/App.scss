@@ -363,14 +363,13 @@ a {
       & .arrow {
         animation: moveright 1s infinite;
       }
-
-
     }
 
     & .arrow {
-        position: relative;
-      margin-left: 10px;
-      }
+      position: relative;
+      left: 10px;
+      top: 3px;
+     }
   }
 
   &__reset {
@@ -506,8 +505,8 @@ a {
 }
 
 @keyframes moveright {
-  from {left: 0}
-  to {left: 10px}
+  from {left: 10px}
+  to {left: 20px}
 }
 
 @keyframes submit-err {

@@ -65,7 +65,7 @@ const ResetPassword = ({
                 className="sign-in__button-back"
                 onClick={goBack}
             >
-                <img src="../images/arrow-back.png" alt="Back" />
+                <img src="./images/arrow-back.png" alt="Back" />
             </button>
             <h2 className="sign-in__heading">Forgot password?</h2>
             <form onSubmit={handleSubmit}>
